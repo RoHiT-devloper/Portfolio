@@ -1,4 +1,4 @@
-# Rohit Dutta Portfolio
+<!-- # Rohit Dutta Portfolio
 
 A professional portfolio website for Rohit Dutta, showcasing skills, projects, and experience as a Java Full Stack Developer.
 
@@ -21,4 +21,4 @@ A professional portfolio website for Rohit Dutta, showcasing skills, projects, a
 const CONFIG = {
     resumePDF: "https://your-new-resume-link.com/rohit-dutta-resume.pdf",
     // ... other config
-};
+}; -->
