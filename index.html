@@ -231,6 +231,9 @@
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         animation: slideIn 0.3s;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        height: 90vh;
     }
 
     .modal-header {
@@ -240,6 +243,7 @@
         padding: 20px 30px;
         background: var(--primary);
         color: white;
+        flex-shrink: 0;
     }
 
     .modal-header h2 {
@@ -261,6 +265,10 @@
 
     .modal-body {
         padding: 20px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
     }
 
     .resume-controls {
@@ -270,6 +278,7 @@
         margin-bottom: 20px;
         flex-wrap: wrap;
         gap: 10px;
+        flex-shrink: 0;
     }
 
     .resume-btn {
@@ -307,6 +316,14 @@
         border: 1px solid var(--border-color);
         border-radius: 5px;
         overflow: hidden;
+        flex-grow: 1;
+        min-height: 0; /* Important for flex child to respect height constraints */
+    }
+
+    #pdfViewer {
+        width: 100%;
+        height: 100%;
+        border: none;
     }
 
     /* Hero Section */
@@ -818,6 +835,7 @@
         .modal-content {
             width: 95%;
             margin: 5% auto;
+            height: 85vh;
         }
     }
 
@@ -889,6 +907,20 @@
         .resume-btn {
             justify-content: center;
         }
+        
+        .modal-content {
+            width: 98%;
+            margin: 2% auto;
+            height: 90vh;
+        }
+        
+        .modal-header {
+            padding: 15px 20px;
+        }
+        
+        .modal-body {
+            padding: 15px;
+        }
     }
 
     @media (max-width: 576px) {
@@ -916,6 +948,35 @@
         
         .modal-body {
             padding: 15px;
+        }
+        
+        .modal-content {
+            height: 95vh;
+        }
+    }
+    
+    /* PDF Viewer specific responsive adjustments */
+    @media (max-height: 700px) {
+        .modal-content {
+            height: 95vh;
+        }
+    }
+    
+    @media (max-height: 500px) {
+        .modal-content {
+            height: 98vh;
+        }
+        
+        .modal-header {
+            padding: 10px 15px;
+        }
+        
+        .modal-body {
+            padding: 10px;
+        }
+        
+        .resume-controls {
+            margin-bottom: 10px;
         }
     }
     </style>
@@ -952,7 +1013,7 @@
                 <span class="close">&times;</span>
             </div>
             <div class="modal-body">
-                <div class="resume-controls">
+                <!-- <div class="resume-controls">
                     <button id="prevPage" class="resume-btn">
                         <i class="fas fa-chevron-left"></i> Previous
                     </button>
@@ -963,9 +1024,9 @@
                     <button id="downloadResume" class="resume-btn download">
                         <i class="fas fa-download"></i> Download
                     </button>
-                </div>
+                </div> -->
                 <div class="pdf-container">
-                    <iframe id="pdfViewer" src="" width="100%" height="600px"></iframe>
+                    <iframe id="pdfViewer" src="" width="100%" height="100%"></iframe>
                 </div>
             </div>
         </div>
@@ -1248,17 +1309,17 @@
     </section>
 
     <!-- Footer -->
-    <footer>
+    <!-- <footer>
         <div class="container">
             <p>&copy; 2023 Rohit Dutta. All Rights Reserved.</p>
         </div>
-    </footer>
+    </footer> -->
 
     <!-- Inlined JS (from script.js) -->
     <script>
     // Configuration - Update these values with your actual links
     const CONFIG = {
-        resumePDF: "https://github.com/RoHiT-devloper/Portfolio/blob/main/Rohit_Dutta_Resume.pdf", // Replace with your actual PDF link
+        resumePDF: "C:\\Users\\rohit\\OneDrive\\Desktop\\Portfolio\\Rohit_Dutta_Resume.pdf", // Replace with your actual PDF link
         socialLinks: {
             linkedin: "https://linkedin.com/in/rohit-dutta",
             github: "https://github.com/rohitdutta",
@@ -1323,12 +1384,19 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', smoothScroll);
         });
+        
+        // Window resize handler for PDF viewer
+        window.addEventListener('resize', handleWindowResize);
     }
 
     // Setup Resume Viewer
     function setupResumeViewer() {
         // Set the PDF source
-        if (pdfViewer) pdfViewer.src = CONFIG.resumePDF;
+        if (pdfViewer) {
+            pdfViewer.src = CONFIG.resumePDF;
+            // Add a parameter to ensure PDF loads correctly
+            pdfViewer.src += "#toolbar=0&navpanes=0&scrollbar=0";
+        }
         
         // Set download link (note: original element is a button — if you want direct download, consider changing it to an <a> tag)
         try {
@@ -1416,6 +1484,11 @@
         e.preventDefault();
         resumeModal.style.display = 'block';
         document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        
+        // Ensure PDF viewer is properly sized
+        setTimeout(() => {
+            adjustPdfViewerSize();
+        }, 100);
     }
 
     function closeResumeModal() {
@@ -1453,6 +1526,27 @@
                 top: targetElement.offsetTop - 80,
                 behavior: 'smooth'
             });
+        }
+    }
+
+    // Window resize handler
+    function handleWindowResize() {
+        // Adjust PDF viewer size when window is resized
+        if (resumeModal.style.display === 'block') {
+            adjustPdfViewerSize();
+        }
+    }
+
+    // PDF Viewer size adjustment
+    function adjustPdfViewerSize() {
+        // This function ensures the PDF viewer properly fits its container
+        const pdfContainer = document.querySelector('.pdf-container');
+        if (pdfContainer) {
+            // Force a reflow to ensure proper sizing
+            pdfContainer.style.height = 'auto';
+            setTimeout(() => {
+                // The flex layout should handle the height automatically
+            }, 10);
         }
     }
 
