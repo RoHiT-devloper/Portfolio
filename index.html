@@ -208,7 +208,7 @@
     }
 
     /* Resume Modal */
-    .resume-modal {
+    .resume-modal, .project-modal {
         display: none;
         position: fixed;
         top: 0;
@@ -221,13 +221,13 @@
         animation: fadeIn 0.3s ease;
     }
 
-    .resume-modal.active {
+    .resume-modal.active, .project-modal.active {
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
-    .resume-modal-content {
+    .resume-modal-content, .project-modal-content {
         background: var(--card-bg);
         border-radius: 15px;
         box-shadow: var(--shadow);
@@ -239,7 +239,7 @@
         animation: slideIn 0.3s ease;
     }
 
-    .resume-modal-header {
+    .resume-modal-header, .project-modal-header {
         position: sticky;
         top: 0;
         background: var(--card-bg);
@@ -251,13 +251,13 @@
         z-index: 10;
     }
 
-    .resume-modal-title {
+    .resume-modal-title, .project-modal-title {
         font-size: 1.8rem;
         color: var(--primary);
         margin: 0;
     }
 
-    .resume-modal-close {
+    .resume-modal-close, .project-modal-close {
         background: none;
         border: none;
         font-size: 1.5rem;
@@ -267,12 +267,12 @@
         padding: 5px;
     }
 
-    .resume-modal-close:hover {
+    .resume-modal-close:hover, .project-modal-close:hover {
         color: var(--primary);
         transform: scale(1.1);
     }
 
-    .resume-modal-body {
+    .resume-modal-body, .project-modal-body {
         padding: 0;
     }
 
@@ -809,6 +809,8 @@
         opacity: 0;
         transform: translateY(20px);
         border: 1px solid var(--border-color);
+        position: relative;
+        overflow: hidden;
     }
 
     .project-card.visible {
@@ -824,6 +826,7 @@
     .project-image {
         height: 200px;
         overflow: hidden;
+        position: relative;
     }
 
     .project-image img {
@@ -835,6 +838,29 @@
 
     .project-card:hover .project-image img {
         transform: scale(1.05);
+    }
+
+    .project-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: var(--transition);
+    }
+
+    .project-card:hover .project-overlay {
+        opacity: 1;
+    }
+
+    .project-overlay-content {
+        text-align: center;
+        color: white;
     }
 
     .project-content {
@@ -950,6 +976,99 @@
     .education-date {
         font-weight: 600;
         color: var(--primary);
+        margin-bottom: 5px;
+    }
+
+    /* Experience Section */
+    .experience {
+        background: var(--card-bg);
+    }
+
+    .experience-timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .experience-timeline::after {
+        content: '';
+        position: absolute;
+        width: 4px;
+        background: var(--primary);
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -2px;
+    }
+
+    .experience-item-timeline {
+        padding: 10px 40px;
+        position: relative;
+        width: 50%;
+        opacity: 0;
+        transform: translateX(-20px);
+        transition: all 0.5s ease;
+    }
+
+    .experience-item-timeline.visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .experience-item-timeline:nth-child(even) {
+        left: 50%;
+        transform: translateX(20px);
+    }
+
+    .experience-item-timeline:nth-child(even).visible {
+        transform: translateX(0);
+    }
+
+    .experience-content-item {
+        padding: 20px 30px;
+        background: var(--bg-color);
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+        position: relative;
+        border: 1px solid var(--border-color);
+        border-left: 4px solid var(--secondary);
+    }
+
+    .experience-content-item::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        right: -10px;
+        background: var(--bg-color);
+        top: 20px;
+        border-radius: 50%;
+        z-index: 1;
+        border: 2px solid var(--secondary);
+    }
+
+    .experience-item-timeline:nth-child(even) .experience-content-item::after {
+        left: -10px;
+    }
+
+    .experience-content-item h3 {
+        font-size: 1.3rem;
+        margin-bottom: 5px;
+    }
+
+    .experience-content-item h4 {
+        font-size: 1rem;
+        color: var(--secondary);
+        margin-bottom: 10px;
+    }
+
+    .experience-content-item p {
+        color: var(--gray);
+    }
+
+    .experience-date {
+        font-weight: 600;
+        color: var(--secondary);
         margin-bottom: 5px;
     }
 
@@ -1147,21 +1266,21 @@
             order: -1;
         }
         
-        .education-timeline::after {
+        .education-timeline::after, .experience-timeline::after {
             left: 31px;
         }
         
-        .education-item {
+        .education-item, .experience-item-timeline {
             width: 100%;
             padding-left: 70px;
             padding-right: 25px;
         }
         
-        .education-item:nth-child(even) {
+        .education-item:nth-child(even), .experience-item-timeline:nth-child(even) {
             left: 0;
         }
         
-        .education-content-item::after {
+        .education-content-item::after, .experience-content-item::after {
             left: -10px;
         }
         
@@ -1264,12 +1383,12 @@
             align-items: center;
         }
         
-        .resume-modal-content {
+        .resume-modal-content, .project-modal-content {
             width: 98%;
             max-height: 95vh;
         }
         
-        .resume-modal-header {
+        .resume-modal-header, .project-modal-header {
             padding: 15px 20px;
         }
         
@@ -1325,6 +1444,7 @@
                 <a href="#" class="logo">RD</a>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
+                    <li><a href="#experience">Experience</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#education">Education</a></li>
                     <li><a href="#about">About</a></li>
@@ -1584,6 +1704,25 @@
         </div>
     </div>
 
+    <!-- Project Modal -->
+    <div id="projectModal" class="project-modal">
+        <div class="project-modal-content">
+            <div class="project-modal-header">
+                <h2 class="project-modal-title" id="projectModalTitle">Project Details</h2>
+                <button class="project-modal-close" id="closeProjectModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="project-modal-body">
+                <div class="resume-container">
+                    <div id="projectModalContent">
+                        <!-- Project details will be inserted here dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
@@ -1614,84 +1753,114 @@
         </div>
     </section>
 
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="experience-timeline">
+                <div class="experience-item-timeline">
+                    <div class="experience-content-item">
+                        <div class="experience-date">Oct 2024 - June 2025</div>
+                        <h3>Full Stack Java Developer</h3>
+                        <h4>KodNest Technologies Pvt Ltd</h4>
+                        <p>Completed Java Full Stack Development training covering Core Java, Spring Boot, Hibernate, SQL, HTML, CSS, JavaScript, and React. Gained hands-on experience in real-time projects and acquired strong knowledge of SDLC.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
             <h2 class="section-title">Major Projects</h2>
             <div class="projects-grid">
-                <div class="project-card">
+                <div class="project-card" data-project="sales">
                     <div class="project-image">
                         <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
                             <rect width="400" height="200" fill="#2563eb"/>
                             <text x="200" y="100" text-anchor="middle" fill="white" font-size="24" font-weight="bold">SalesSavvy Platform</text>
                         </svg>
+                        <div class="project-overlay">
+                            <div class="project-overlay-content">
+                                <h3>View Details</h3>
+                                <p>Click to explore this project</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">SalesSavvy E-commerce Platform</h3>
-                        <p class="project-description">Engineered a comprehensive full-stack e-commerce solution capable of handling 50,000+ products with secure payment processing, real-time inventory management, and advanced analytics. The platform features a microservices architecture that ensures scalability and reliability while providing an exceptional user experience.</p>
+                        <p class="project-description">Engineered a comprehensive full-stack e-commerce solution capable of handling 50,000+ products with secure payment processing, real-time inventory management, and advanced analytics.</p>
                         <div class="project-tech">
                             <span class="tech-tag">Java</span>
                             <span class="tech-tag">Spring Boot</span>
                             <span class="tech-tag">React</span>
                             <span class="tech-tag">MySQL</span>
                             <span class="tech-tag">Razorpay</span>
-                            <span class="tech-tag">Microservices</span>
-                            <span class="tech-tag">JWT</span>
                         </div>
                         <div class="project-links">
                             <a href="https://salesbyrohit.netlify.app/" class="btn" target="_blank">Live Demo</a>
-                            <a href="#" class="btn btn-outline">Technical Details</a>
+                            <a href="#" class="btn btn-outline view-project-details">Details</a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="project-card">
+                <div class="project-card" data-project="music">
                     <div class="project-image">
                         <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
                             <rect width="400" height="200" fill="#10b981"/>
                             <text x="200" y="100" text-anchor="middle" fill="white" font-size="24" font-weight="bold">Music Sphere</text>
                         </svg>
+                        <div class="project-overlay">
+                            <div class="project-overlay-content">
+                                <h3>View Details</h3>
+                                <p>Click to explore this project</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">Music Sphere</h3>
-                        <p class="project-description">Developed a modern music streaming application with comprehensive features including playlist management, music discovery, and social sharing capabilities. Implemented secure user authentication and authorization systems while ensuring optimal performance across various devices and network conditions.</p>
+                        <p class="project-description">Developed a modern music streaming application with comprehensive features including playlist management, music discovery, and social sharing capabilities.</p>
                         <div class="project-tech">
                             <span class="tech-tag">Java</span>
                             <span class="tech-tag">Spring Boot</span>
                             <span class="tech-tag">HTML/CSS</span>
                             <span class="tech-tag">JavaScript</span>
                             <span class="tech-tag">Node.js</span>
-                            <span class="tech-tag">MongoDB</span>
-                            <span class="tech-tag">JWT</span>
                         </div>
                         <div class="project-links">
                             <a href="#" class="btn">Live Demo</a>
-                            <a href="#" class="btn btn-outline">Technical Details</a>
+                            <a href="#" class="btn btn-outline view-project-details">Details</a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="project-card">
+                <div class="project-card" data-project="portfolio">
                     <div class="project-image">
                         <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
                             <rect width="400" height="200" fill="#8b5cf6"/>
                             <text x="200" y="100" text-anchor="middle" fill="white" font-size="24" font-weight="bold">Portfolio Website</text>
                         </svg>
+                        <div class="project-overlay">
+                            <div class="project-overlay-content">
+                                <h3>View Details</h3>
+                                <p>Click to explore this project</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">Portfolio Website</h3>
-                        <p class="project-description">Designed and developed a responsive portfolio website with modern UI/UX principles, smooth animations, and optimized performance. Implemented best practices for web accessibility and SEO while ensuring cross-browser compatibility and mobile-first responsive design.</p>
+                        <p class="project-description">Designed and developed a responsive portfolio website with modern UI/UX principles, smooth animations, and optimized performance.</p>
                         <div class="project-tech">
                             <span class="tech-tag">HTML5</span>
                             <span class="tech-tag">CSS3</span>
                             <span class="tech-tag">JavaScript</span>
                             <span class="tech-tag">Responsive Design</span>
                             <span class="tech-tag">UI/UX</span>
-                            <span class="tech-tag">SEO</span>
                         </div>
                         <div class="project-links">
                             <a href="#" class="btn">Live Demo</a>
-                            <a href="#" class="btn btn-outline">Technical Details</a>
+                            <a href="#" class="btn btn-outline view-project-details">Details</a>
                         </div>
                     </div>
                 </div>
@@ -1866,6 +2035,13 @@
         </div>
     </section>
 
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Rohit Dutta. All Rights Reserved.</p>
+        </div>
+    </footer>
+
     <!-- JavaScript -->
     <script>
     // DOM Elements
@@ -1877,6 +2053,56 @@
     const closeResumeModal = document.getElementById('closeResumeModal');
     const downloadResumeBtn = document.getElementById('downloadResumeBtn');
     const resumeLink = document.getElementById('resumeLink');
+    const projectModal = document.getElementById('projectModal');
+    const closeProjectModal = document.getElementById('closeProjectModal');
+    const projectModalTitle = document.getElementById('projectModalTitle');
+    const projectModalContent = document.getElementById('projectModalContent');
+
+    // Project Data
+    const projects = {
+        sales: {
+            title: "SalesSavvy E-commerce Platform",
+            description: "Engineered a comprehensive full-stack e-commerce solution capable of handling 50,000+ products with secure payment processing, real-time inventory management, and advanced analytics. The platform features a microservices architecture that ensures scalability and reliability while providing an exceptional user experience.",
+            technologies: ["Java", "Spring Boot", "React", "MySQL", "Razorpay", "Microservices", "JWT"],
+            features: [
+                "Developed scalable microservices architecture using Spring Boot",
+                "Implemented JWT authentication, role-based access control, and comprehensive API security",
+                "Built responsive React frontend with advanced features including wishlist management and coupon system",
+                "Integrated Razorpay payment gateway, reducing checkout time by 40%",
+                "Designed and deployed admin analytics dashboard with sales tracking and inventory alerts"
+            ],
+            liveLink: "https://salesbyrohit.netlify.app/",
+            githubLink: "#"
+        },
+        music: {
+            title: "Music Sphere",
+            description: "Developed a modern music streaming application with comprehensive features including playlist management, music discovery, and social sharing capabilities. Implemented secure user authentication and authorization systems while ensuring optimal performance across various devices and network conditions.",
+            technologies: ["Java", "Spring Boot", "HTML/CSS", "JavaScript", "Node.js", "MongoDB", "JWT"],
+            features: [
+                "Integrated JWT authentication for secure user access",
+                "Developed a responsive frontend with React.js",
+                "Ensured scalable API performance using Node.js & Express",
+                "Optimized data handling with MongoDB for playlist and music metadata",
+                "Implemented music discovery algorithms and social sharing features"
+            ],
+            liveLink: "#",
+            githubLink: "#"
+        },
+        portfolio: {
+            title: "Portfolio Website",
+            description: "Designed and developed a responsive portfolio website with modern UI/UX principles, smooth animations, and optimized performance. Implemented best practices for web accessibility and SEO while ensuring cross-browser compatibility and mobile-first responsive design.",
+            technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "UI/UX", "SEO"],
+            features: [
+                "Implemented modern UI/UX principles for optimal user experience",
+                "Ensured responsive design with mobile-first approach",
+                "Optimized performance and loading times",
+                "Applied SEO best practices for better search engine visibility",
+                "Added smooth animations and transitions for enhanced interactivity"
+            ],
+            liveLink: "#",
+            githubLink: "#"
+        }
+    };
 
     // Initialize the application
     function init() {
@@ -1903,10 +2129,26 @@
         if (closeResumeModal) closeResumeModal.addEventListener('click', closeResumeModalFunc);
         if (downloadResumeBtn) downloadResumeBtn.addEventListener('click', downloadResume);
         
-        // Close modal when clicking outside
+        // Project Modal
+        if (closeProjectModal) closeProjectModal.addEventListener('click', closeProjectModalFunc);
+        
+        // View Project Details
+        document.querySelectorAll('.view-project-details').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const projectCard = this.closest('.project-card');
+                const projectId = projectCard.getAttribute('data-project');
+                openProjectModal(projectId);
+            });
+        });
+        
+        // Close modals when clicking outside
         window.addEventListener('click', (e) => {
             if (e.target === resumeModal) {
                 closeResumeModalFunc();
+            }
+            if (e.target === projectModal) {
+                closeProjectModalFunc();
             }
         });
         
@@ -1920,10 +2162,15 @@
             }
         });
         
-        // Close modal with Escape key
+        // Close modals with Escape key
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && resumeModal.classList.contains('active')) {
-                closeResumeModalFunc();
+            if (e.key === 'Escape') {
+                if (resumeModal.classList.contains('active')) {
+                    closeResumeModalFunc();
+                }
+                if (projectModal.classList.contains('active')) {
+                    closeProjectModalFunc();
+                }
             }
         });
     }
@@ -1949,7 +2196,7 @@
         }, observerOptions);
         
         // Observe elements for animation
-        document.querySelectorAll('.project-card, .education-item').forEach(el => {
+        document.querySelectorAll('.project-card, .education-item, .experience-item-timeline').forEach(el => {
             observer.observe(el);
         });
     }
@@ -2020,6 +2267,57 @@
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+    }
+
+    // Project Modal Functions
+    function openProjectModal(projectId) {
+        const project = projects[projectId];
+        if (!project) return;
+        
+        projectModalTitle.textContent = project.title;
+        
+        let techTags = '';
+        project.technologies.forEach(tech => {
+            techTags += `<span class="tech-tag">${tech}</span>`;
+        });
+        
+        let featuresList = '';
+        project.features.forEach(feature => {
+            featuresList += `<li>${feature}</li>`;
+        });
+        
+        projectModalContent.innerHTML = `
+            <div class="project-item">
+                <div class="project-header">
+                    <div class="project-title">${project.title}</div>
+                </div>
+                <div class="project-tech">
+                    ${techTags}
+                </div>
+                <p class="project-description">
+                    ${project.description}
+                </p>
+                <ul class="experience-list">
+                    ${featuresList}
+                </ul>
+                <div class="project-links">
+                    <a href="${project.liveLink}" class="btn" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>
+                    <a href="${project.githubLink}" class="btn btn-outline" target="_blank">
+                        <i class="fab fa-github"></i> View Code
+                    </a>
+                </div>
+            </div>
+        `;
+        
+        projectModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeProjectModalFunc() {
+        projectModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
     }
 
     // Scroll Functions
