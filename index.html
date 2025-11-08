@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Inlined CSS (from style.css) -->
     <style>
     :root {
         --primary: #2563eb;
@@ -208,17 +207,79 @@
         cursor: pointer;
     }
 
-    /* Resume Section */
-    .resume-section {
-        background: var(--card-bg);
+    /* Resume Modal */
+    .resume-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 2000;
+        overflow-y: auto;
+        animation: fadeIn 0.3s ease;
     }
 
-    .resume-container {
-        max-width: 1000px;
-        margin: 0 auto;
+    .resume-modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .resume-modal-content {
         background: var(--card-bg);
         border-radius: 15px;
         box-shadow: var(--shadow);
+        max-width: 1000px;
+        width: 95%;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+        animation: slideIn 0.3s ease;
+    }
+
+    .resume-modal-header {
+        position: sticky;
+        top: 0;
+        background: var(--card-bg);
+        padding: 20px 30px;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 10;
+    }
+
+    .resume-modal-title {
+        font-size: 1.8rem;
+        color: var(--primary);
+        margin: 0;
+    }
+
+    .resume-modal-close {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: var(--transition);
+        padding: 5px;
+    }
+
+    .resume-modal-close:hover {
+        color: var(--primary);
+        transform: scale(1.1);
+    }
+
+    .resume-modal-body {
+        padding: 0;
+    }
+
+    /* Resume Container Styles */
+    .resume-container {
+        background: var(--card-bg);
+        border-radius: 15px;
         overflow: hidden;
         border: 1px solid var(--border-color);
     }
@@ -529,6 +590,33 @@
         flex-wrap: wrap;
     }
 
+    /* Download Button */
+    .download-btn {
+        background: var(--secondary);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .download-btn:hover {
+        background: #0da271;
+        transform: translateY(-2px);
+    }
+
+    .resume-modal-actions {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+
     /* Print Styles */
     @media print {
         header, .resume-actions {
@@ -604,15 +692,16 @@
         animation: fadeInRight 1s forwards 1s;
     }
 
+    /* Improved Profile Photo - Non-rotating */
     .profile-photo {
-        width: 300px;
-        height: 300px;
+        width: 350px;
+        height: 350px;
         margin: 0 auto;
         position: relative;
         border-radius: 50%;
         background: linear-gradient(135deg, var(--primary), var(--secondary));
         padding: 8px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         animation: float 6s ease-in-out infinite;
     }
 
@@ -626,6 +715,7 @@
         align-items: center;
         justify-content: center;
         border: 4px solid var(--card-bg);
+        position: relative;
     }
 
     .profile-photo-inner img {
@@ -633,6 +723,30 @@
         height: 100%;
         object-fit: cover;
         border-radius: 50%;
+    }
+
+    .profile-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(37, 99, 235, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: var(--transition);
+    }
+
+    .profile-photo:hover .profile-overlay {
+        opacity: 1;
+    }
+
+    .profile-overlay i {
+        font-size: 2rem;
+        color: white;
     }
 
     .floating-elements {
@@ -790,13 +904,6 @@
     .project-description {
         color: var(--gray);
         margin-bottom: 15px;
-    }
-
-    .project-tech {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-bottom: 20px;
     }
 
     .project-links {
@@ -997,13 +1104,13 @@
 
     @keyframes float {
         0% {
-            transform: translateY(0) rotate(0deg);
+            transform: translateY(0);
         }
         50% {
-            transform: translateY(-20px) rotate(180deg);
+            transform: translateY(-15px);
         }
         100% {
-            transform: translateY(0) rotate(360deg);
+            transform: translateY(0);
         }
     }
 
@@ -1055,6 +1162,11 @@
         
         .resume-content {
             padding: 30px 20px;
+        }
+        
+        .profile-photo {
+            width: 280px;
+            height: 280px;
         }
     }
 
@@ -1142,6 +1254,25 @@
             flex-direction: column;
             align-items: center;
         }
+        
+        .resume-modal-content {
+            width: 98%;
+            max-height: 95vh;
+        }
+        
+        .resume-modal-header {
+            padding: 15px 20px;
+        }
+        
+        .resume-modal-actions {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        
+        .profile-photo {
+            width: 250px;
+            height: 250px;
+        }
     }
 
     @media (max-width: 576px) {
@@ -1159,8 +1290,8 @@
         }
         
         .profile-photo {
-            width: 250px;
-            height: 250px;
+            width: 220px;
+            height: 220px;
         }
         
         .resume-name {
@@ -1187,7 +1318,7 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#projects">Projects</a></li>
-                    <li><a href="#resume">Resume</a></li>
+                    <li><a href="#" id="resumeLink">Resume</a></li>
                     <li><a href="#experience">Experience</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -1200,6 +1331,249 @@
             </nav>
         </div>
     </header>
+
+    <!-- Resume Modal -->
+    <div id="resumeModal" class="resume-modal">
+        <div class="resume-modal-content">
+            <div class="resume-modal-header">
+                <h2 class="resume-modal-title">My Resume</h2>
+                <div class="resume-modal-actions">
+                    <button class="download-btn" id="downloadResumeBtn">
+                        <i class="fas fa-download"></i> Download PDF
+                    </button>
+                    <button class="resume-modal-close" id="closeResumeModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="resume-modal-body">
+                <div class="resume-container">
+                    <!-- Resume Header -->
+                    <div class="resume-header">
+                        <h1 class="resume-name">Rohit Dutta</h1>
+                        <div class="resume-title">Java Developer | Full Stack | Cloud & DevOps</div>
+                        
+                        <div class="resume-contact">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>rohitdutta2212rd@gmail.com</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <span>+91 9431792677</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Bengaluru, Karnataka, India</span>
+                            </div>
+                        </div>
+                        
+                        <div class="resume-social">
+                            <a href="https://www.linkedin.com/in/m-rohit-dutta/" class="social-link" target="_blank">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://github.com/RoHiT-devloper" class="social-link" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.hackerrank.com/profile/rohitdutta2212rd" class="social-link" target="_blank">
+                                <i class="fab fa-hackerrank"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Resume Content -->
+                    <div class="resume-content">
+                        <!-- Professional Summary -->
+                        <div class="resume-section-inner">
+                            <h3 class="resume-section-title">Professional Summary</h3>
+                            <p class="professional-summary">
+                                Results-driven Java Developer with strong knowledge in Full Stack Development, 
+                                Cloud Computing (AWS, Azure), and DevOps practices. Skilled in building scalable 
+                                web applications using Java, Spring Boot, React.js, Node.js, and proficient in 
+                                CI/CD, Docker, Kubernetes, and Git. Passionate about clean code, automation, 
+                                and delivering robust software solutions in Agile environments.
+                            </p>
+                        </div>
+                        
+                        <!-- Professional Training -->
+                        <div class="resume-section-inner">
+                            <h3 class="resume-section-title">Professional Training</h3>
+                            <div class="experience-item">
+                                <div class="experience-header">
+                                    <div>
+                                        <div class="experience-company">KodNest Technologies Pvt Ltd</div>
+                                        <div class="experience-role">Full Stack Java Developer</div>
+                                    </div>
+                                    <div class="experience-duration">Oct 2024 - June 2025</div>
+                                </div>
+                                <div class="experience-description">
+                                    <ul class="experience-list">
+                                        <li>Completed Java Full Stack Development training at KodNest Technologies, covering Core Java, Spring Boot, Hibernate, SQL, HTML, CSS, JavaScript, and React</li>
+                                        <li>Gained hands-on experience in real-time projects, collaborating with mentors to drive key milestones</li>
+                                        <li>Completed three intensive training programs Successfully, contributing effectively to team goals and project success</li>
+                                        <li>Acquired strong knowledge of the Software Development Life Cycle (SDLC), from requirements to deployment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Technical Skills -->
+                        <div class="resume-section-inner">
+                            <h3 class="resume-section-title">Technical Skills</h3>
+                            <div class="skills-container">
+                                <div class="skill-category">
+                                    <div class="skill-tags">
+                                        <span class="skill-tag">Java</span>
+                                        <span class="skill-tag">Spring Boot</span>
+                                        <span class="skill-tag">DevOps</span>
+                                        <span class="skill-tag">AWS</span>
+                                        <span class="skill-tag">Git</span>
+                                        <span class="skill-tag">GitHub</span>
+                                        <span class="skill-tag">Eclipse</span>
+                                        <span class="skill-tag">Docker</span>
+                                        <span class="skill-tag">Postman</span>
+                                        <span class="skill-tag">MySQL</span>
+                                        <span class="skill-tag">JENKINS</span>
+                                        <span class="skill-tag">Terraform</span>
+                                        <span class="skill-tag">Python</span>
+                                        <span class="skill-tag">CI/CD</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Major Projects -->
+                        <div class="resume-section-inner">
+                            <h3 class="resume-section-title">Major Projects</h3>
+                            
+                            <!-- Project 1 -->
+                            <div class="project-item">
+                                <div class="project-header">
+                                    <div class="project-title">SalesSavvy E-commerce Platform</div>
+                                </div>
+                                <div class="project-tech">
+                                    <span class="tech-tag">Java</span>
+                                    <span class="tech-tag">Spring Boot</span>
+                                    <span class="tech-tag">React</span>
+                                    <span class="tech-tag">MySQL</span>
+                                    <span class="tech-tag">Razorpay</span>
+                                </div>
+                                <p class="project-description">
+                                    Engineered a full-stack e-commerce solution serving 50,000+ products with secure payment processing and real-time inventory management.
+                                </p>
+                                <ul class="experience-list">
+                                    <li>Developed scalable microservices architecture using Spring Boot, implementing JWT authentication, role-based access control, and comprehensive API security</li>
+                                    <li>Built responsive React frontend with advanced features including wishlist management, coupon system, and real-time cart synchronization</li>
+                                    <li>Implemented Razorpay payment gateway integration, reducing checkout time by 40% and increasing conversion rates by 25%</li>
+                                    <li>Designed and deployed admin analytics dashboard with sales tracking, inventory alerts, and customer behavior insights using Spring Data JPA</li>
+                                </ul>
+                                <a href="https://salesbyrohit.netlify.app/" class="project-link" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    View Live Project
+                                </a>
+                            </div>
+                            
+                            <!-- Project 2 -->
+                            <div class="project-item">
+                                <div class="project-header">
+                                    <div class="project-title">Music Sphere</div>
+                                </div>
+                                <div class="project-tech">
+                                    <span class="tech-tag">CSS</span>
+                                    <span class="tech-tag">Java</span>
+                                    <span class="tech-tag">HTML</span>
+                                    <span class="tech-tag">Spring Boot</span>
+                                </div>
+                                <p class="project-description">
+                                    Built a music streaming web app allowing users to search, play, and manage playlists.
+                                </p>
+                                <ul class="experience-list">
+                                    <li>Integrated JWT authentication for secure user access</li>
+                                    <li>Developed a responsive frontend with React.js and ensured scalable API performance using Node.js & Express</li>
+                                    <li>Backend services are powered by Node.js and Express, ensuring fast and scalable API communication</li>
+                                    <li>Optimized data handling with MongoDB for playlist and music metadata</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Academic Details -->
+                        <div class="resume-section-inner">
+                            <h3 class="resume-section-title">Academic Details</h3>
+                            <table class="education-table">
+                                <thead>
+                                    <tr>
+                                        <th>Examination</th>
+                                        <th>University/Institute</th>
+                                        <th>Location</th>
+                                        <th>Year</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Masters in Computer Application</td>
+                                        <td>Chandigarh University</td>
+                                        <td>Kharar, Punjab</td>
+                                        <td>2024</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bachelors in Computer Application</td>
+                                        <td>Amity University</td>
+                                        <td>Ranchi, Jharkhand</td>
+                                        <td>2022</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Intermediate</td>
+                                        <td>Oxford Public School</td>
+                                        <td>Ranchi, Jharkhand</td>
+                                        <td>2019</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Certificates -->
+                        <div class="resume-section-inner">
+                            <h3 class="resume-section-title">Certificates</h3>
+                            <div class="certificate-item">
+                                <div class="certificate-title">Problem Solving (Intermediate) Certificate</div>
+                                <a href="https://www.hackerrank.com/certificates/0a4cda31903b" class="certificate-link" target="_blank">
+                                    Hacker Rank Certificate Link
+                                </a>
+                            </div>
+                            <div class="certificate-item">
+                                <div class="certificate-title">Google Cloud Fundamentals: Core Infrastructure</div>
+                                <a href="https://www.cloudskillsboost.google/public_profiles/c0d8fa2c-1e14-4aeb-bd1a-2d28cd62a6e7/badges/3433362" class="certificate-link" target="_blank">
+                                    Google Cloud Skill Boost
+                                </a>
+                            </div>
+                            <div class="certificate-item">
+                                <div class="certificate-title">Build Infrastructure with Terraform on Google Cloud</div>
+                                <a href="https://www.cloudskillsboost.google/public_profiles/c0d8fa2c-1e14-4aeb-bd1a-2d28cd62a6e7/badges/3313814" class="certificate-link" target="_blank">
+                                    Google Cloud Skill Boost
+                                </a>
+                            </div>
+                            <div class="certificate-item">
+                                <div class="certificate-title">Reliable Google Cloud Infrastructure: Design and Process</div>
+                                <a href="https://www.cloudskillsboost.google/public_profiles/c0d8fa2c-1e14-4aeb-bd1a-2d28cd62a6e7/badges/3432347" class="certificate-link" target="_blank">
+                                    Google Cloud Skill Boost
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="resume-actions">
+                            <button class="btn" onclick="window.print()">
+                                <i class="fas fa-print"></i> Print Resume
+                            </button>
+                            <a href="#contact" class="btn btn-outline" onclick="closeResume()">
+                                <i class="fas fa-envelope"></i> Contact Me
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -1218,6 +1592,9 @@
             <div class="profile-photo">
                 <div class="profile-photo-inner">
                     <img src="./1751294918810.jpg" alt="Rohit Dutta">
+                    <div class="profile-overlay">
+                        <i class="fas fa-user"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1299,10 +1676,14 @@
                     <div class="profile-photo">
                         <div class="profile-photo-inner">
                             <img src="./1751294918810.jpg" alt="Rohit Dutta">
+                            <div class="profile-overlay">
+                                <i class="fas fa-user"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     </section>
 
     <!-- Projects Section -->
@@ -1377,237 +1758,6 @@
                             <a href="#" class="btn">Live Demo</a>
                             <a href="#" class="btn btn-outline">Details</a>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Resume Section -->
-    <section id="resume" class="resume-section">
-        <div class="container">
-            <h2 class="section-title">My Resume</h2>
-            <div class="resume-container">
-                <!-- Resume Header -->
-                <div class="resume-header">
-                    <h1 class="resume-name">Rohit Dutta</h1>
-                    <div class="resume-title">Java Developer | Full Stack | Cloud & DevOps</div>
-                    
-                    <div class="resume-contact">
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>rohitdutta2212rd@gmail.com</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <span>+91 9431792677</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Bengaluru, Karnataka, India</span>
-                        </div>
-                    </div>
-                    
-                    <div class="resume-social">
-                        <a href="https://www.linkedin.com/in/m-rohit-dutta/" class="social-link" target="_blank">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="https://github.com/RoHiT-devloper" class="social-link" target="_blank">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://www.hackerrank.com/profile/rohitdutta2212rd" class="social-link" target="_blank">
-                            <i class="fab fa-hackerrank"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Resume Content -->
-                <div class="resume-content">
-                    <!-- Professional Summary -->
-                    <div class="resume-section-inner">
-                        <h3 class="resume-section-title">Professional Summary</h3>
-                        <p class="professional-summary">
-                            Results-driven Java Developer with strong knowledge in Full Stack Development, 
-                            Cloud Computing (AWS, Azure), and DevOps practices. Skilled in building scalable 
-                            web applications using Java, Spring Boot, React.js, Node.js, and proficient in 
-                            CI/CD, Docker, Kubernetes, and Git. Passionate about clean code, automation, 
-                            and delivering robust software solutions in Agile environments.
-                        </p>
-                    </div>
-                    
-                    <!-- Professional Training -->
-                    <div class="resume-section-inner">
-                        <h3 class="resume-section-title">Professional Training</h3>
-                        <div class="experience-item">
-                            <div class="experience-header">
-                                <div>
-                                    <div class="experience-company">KodNest Technologies Pvt Ltd</div>
-                                    <div class="experience-role">Full Stack Java Developer</div>
-                                </div>
-                                <div class="experience-duration">Oct 2024 - June 2025</div>
-                            </div>
-                            <div class="experience-description">
-                                <ul class="experience-list">
-                                    <li>Completed Java Full Stack Development training at KodNest Technologies, covering Core Java, Spring Boot, Hibernate, SQL, HTML, CSS, JavaScript, and React</li>
-                                    <li>Gained hands-on experience in real-time projects, collaborating with mentors to drive key milestones</li>
-                                    <li>Completed three intensive training programs Successfully, contributing effectively to team goals and project success</li>
-                                    <li>Acquired strong knowledge of the Software Development Life Cycle (SDLC), from requirements to deployment</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Technical Skills -->
-                    <div class="resume-section-inner">
-                        <h3 class="resume-section-title">Technical Skills</h3>
-                        <div class="skills-container">
-                            <div class="skill-category">
-                                <div class="skill-tags">
-                                    <span class="skill-tag">Java</span>
-                                    <span class="skill-tag">Spring Boot</span>
-                                    <span class="skill-tag">DevOps</span>
-                                    <span class="skill-tag">AWS</span>
-                                    <span class="skill-tag">Git</span>
-                                    <span class="skill-tag">GitHub</span>
-                                    <span class="skill-tag">Eclipse</span>
-                                    <span class="skill-tag">Docker</span>
-                                    <span class="skill-tag">Postman</span>
-                                    <span class="skill-tag">MySQL</span>
-                                    <span class="skill-tag">JENKINS</span>
-                                    <span class="skill-tag">Terraform</span>
-                                    <span class="skill-tag">Python</span>
-                                    <span class="skill-tag">CI/CD</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Major Projects -->
-                    <div class="resume-section-inner">
-                        <h3 class="resume-section-title">Major Projects</h3>
-                        
-                        <!-- Project 1 -->
-                        <div class="project-item">
-                            <div class="project-header">
-                                <div class="project-title">SalesSavvy E-commerce Platform</div>
-                            </div>
-                            <div class="project-tech">
-                                <span class="tech-tag">Java</span>
-                                <span class="tech-tag">Spring Boot</span>
-                                <span class="tech-tag">React</span>
-                                <span class="tech-tag">MySQL</span>
-                                <span class="tech-tag">Razorpay</span>
-                            </div>
-                            <p class="project-description">
-                                Engineered a full-stack e-commerce solution serving 50,000+ products with secure payment processing and real-time inventory management.
-                            </p>
-                            <ul class="experience-list">
-                                <li>Developed scalable microservices architecture using Spring Boot, implementing JWT authentication, role-based access control, and comprehensive API security</li>
-                                <li>Built responsive React frontend with advanced features including wishlist management, coupon system, and real-time cart synchronization</li>
-                                <li>Implemented Razorpay payment gateway integration, reducing checkout time by 40% and increasing conversion rates by 25%</li>
-                                <li>Designed and deployed admin analytics dashboard with sales tracking, inventory alerts, and customer behavior insights using Spring Data JPA</li>
-                            </ul>
-                            <a href="https://salesbyrohit.netlify.app/" class="project-link" target="_blank">
-                                <i class="fas fa-external-link-alt"></i>
-                                View Live Project
-                            </a>
-                        </div>
-                        
-                        <!-- Project 2 -->
-                        <div class="project-item">
-                            <div class="project-header">
-                                <div class="project-title">Music Sphere</div>
-                            </div>
-                            <div class="project-tech">
-                                <span class="tech-tag">CSS</span>
-                                <span class="tech-tag">Java</span>
-                                <span class="tech-tag">HTML</span>
-                                <span class="tech-tag">Spring Boot</span>
-                            </div>
-                            <p class="project-description">
-                                Built a music streaming web app allowing users to search, play, and manage playlists.
-                            </p>
-                            <ul class="experience-list">
-                                <li>Integrated JWT authentication for secure user access</li>
-                                <li>Developed a responsive frontend with React.js and ensured scalable API performance using Node.js & Express</li>
-                                <li>Backend services are powered by Node.js and Express, ensuring fast and scalable API communication</li>
-                                <li>Optimized data handling with MongoDB for playlist and music metadata</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Academic Details -->
-                    <div class="resume-section-inner">
-                        <h3 class="resume-section-title">Academic Details</h3>
-                        <table class="education-table">
-                            <thead>
-                                <tr>
-                                    <th>Examination</th>
-                                    <th>University/Institute</th>
-                                    <th>Location</th>
-                                    <th>Year</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Masters in Computer Application</td>
-                                    <td>Chandigarh University</td>
-                                    <td>Kharar, Punjab</td>
-                                    <td>2024</td>
-                                </tr>
-                                <tr>
-                                    <td>Bachelors in Computer Application</td>
-                                    <td>Amity University</td>
-                                    <td>Ranchi, Jharkhand</td>
-                                    <td>2022</td>
-                                </tr>
-                                <tr>
-                                    <td>Intermediate</td>
-                                    <td>Oxford Public School</td>
-                                    <td>Ranchi, Jharkhand</td>
-                                    <td>2019</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <!-- Certificates -->
-                    <div class="resume-section-inner">
-                        <h3 class="resume-section-title">Certificates</h3>
-                        <div class="certificate-item">
-                            <div class="certificate-title">Problem Solving (Intermediate) Certificate</div>
-                            <a href="https://www.hackerrank.com/certificates/0a4cda31903b" class="certificate-link" target="_blank">
-                                Hacker Rank Certificate Link
-                            </a>
-                        </div>
-                        <div class="certificate-item">
-                            <div class="certificate-title">Google Cloud Fundamentals: Core Infrastructure</div>
-                            <a href="https://www.cloudskillsboost.google/public_profiles/c0d8fa2c-1e14-4aeb-bd1a-2d28cd62a6e7/badges/3433362" class="certificate-link" target="_blank">
-                                Google Cloud Skill Boost
-                            </a>
-                        </div>
-                        <div class="certificate-item">
-                            <div class="certificate-title">Build Infrastructure with Terraform on Google Cloud</div>
-                            <a href="https://www.cloudskillsboost.google/public_profiles/c0d8fa2c-1e14-4aeb-bd1a-2d28cd62a6e7/badges/3313814" class="certificate-link" target="_blank">
-                                Google Cloud Skill Boost
-                            </a>
-                        </div>
-                        <div class="certificate-item">
-                            <div class="certificate-title">Reliable Google Cloud Infrastructure: Design and Process</div>
-                            <a href="https://www.cloudskillsboost.google/public_profiles/c0d8fa2c-1e14-4aeb-bd1a-2d28cd62a6e7/badges/3432347" class="certificate-link" target="_blank">
-                                Google Cloud Skill Boost
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <!-- Action Buttons -->
-                    <div class="resume-actions">
-                        <button class="btn" onclick="window.print()">
-                            <i class="fas fa-print"></i> Print Resume
-                        </button>
-                        <a href="#contact" class="btn btn-outline">
-                            <i class="fas fa-envelope"></i> Contact Me
-                        </a>
                     </div>
                 </div>
             </div>
@@ -1707,20 +1857,17 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <!-- <footer>
-        <div class="container">
-            <p>&copy; 2023 Rohit Dutta. All Rights Reserved.</p>
-        </div>
-    </footer> -->
-
-    <!-- Inlined JS (from script.js) -->
+    <!-- JavaScript -->
     <script>
     // DOM Elements
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = themeToggle.querySelector('i');
+    const resumeModal = document.getElementById('resumeModal');
+    const closeResumeModal = document.getElementById('closeResumeModal');
+    const downloadResumeBtn = document.getElementById('downloadResumeBtn');
+    const resumeLink = document.getElementById('resumeLink');
 
     // Initialize the application
     function init() {
@@ -1742,12 +1889,33 @@
         // Theme Toggle
         if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
         
+        // Resume Modal
+        if (resumeLink) resumeLink.addEventListener('click', openResumeModal);
+        if (closeResumeModal) closeResumeModal.addEventListener('click', closeResumeModalFunc);
+        if (downloadResumeBtn) downloadResumeBtn.addEventListener('click', downloadResume);
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === resumeModal) {
+                closeResumeModalFunc();
+            }
+        });
+        
         // Header scroll effect
         window.addEventListener('scroll', handleHeaderScroll);
         
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', smoothScroll);
+            if (anchor.getAttribute('href') !== '#') {
+                anchor.addEventListener('click', smoothScroll);
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && resumeModal.classList.contains('active')) {
+                closeResumeModalFunc();
+            }
         });
     }
 
@@ -1789,32 +1957,61 @@
     }
 
     // Theme Functions
-function toggleTheme() {
-    document.body.classList.toggle('dark-theme');
-    
-    if (document.body.classList.contains('dark-theme')) {
-        localStorage.setItem('theme', 'dark');
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-    } else {
-        localStorage.setItem('theme', 'light');
-        themeIcon.classList.remove('fa-sun');
-        themeIcon.classList.add('fa-moon');
+    function toggleTheme() {
+        document.body.classList.toggle('dark-theme');
+        
+        if (document.body.classList.contains('dark-theme')) {
+            localStorage.setItem('theme', 'dark');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        } else {
+            localStorage.setItem('theme', 'light');
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        }
     }
-}
 
-function loadThemePreference() {
-    const currentTheme = localStorage.getItem('theme') || 'dark'; // Changed from 'light' to 'dark'
-    if (currentTheme === 'dark') {
-        document.body.classList.add('dark-theme');
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-    } else {
-        document.body.classList.remove('dark-theme');
-        themeIcon.classList.remove('fa-sun');
-        themeIcon.classList.add('fa-moon');
+    function loadThemePreference() {
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-theme');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        } else {
+            document.body.classList.remove('dark-theme');
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        }
     }
-}
+
+    // Resume Modal Functions
+    function openResumeModal(e) {
+        if (e) e.preventDefault();
+        resumeModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeResumeModalFunc() {
+        resumeModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+
+    function closeResume() {
+        closeResumeModalFunc();
+    }
+
+    function downloadResume() {
+        // Replace this URL with your actual PDF download link
+        const pdfUrl = 'https://github.com/RoHiT-devloper/Portfolio/blob/main/Rohit_Dutta_Resume.pdf';
+        
+        // Create a temporary link to trigger download
+        const link = document.createElement('a');
+        link.href = pdfUrl;
+        link.download = 'Rohit_Dutta_Resume.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
 
     // Scroll Functions
     function handleHeaderScroll() {
