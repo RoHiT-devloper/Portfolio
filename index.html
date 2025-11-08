@@ -1803,14 +1803,18 @@ function toggleTheme() {
     }
 }
 
-    function loadThemePreference() {
-        const currentTheme = localStorage.getItem('theme') || 'dark';
-        if (currentTheme === 'dark') {
-            document.body.classList.add('dark-theme');
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-        }
+function loadThemePreference() {
+    const currentTheme = localStorage.getItem('theme') || 'dark'; // Changed from 'light' to 'dark'
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+    } else {
+        document.body.classList.remove('dark-theme');
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
     }
+}
 
     // Scroll Functions
     function handleHeaderScroll() {
