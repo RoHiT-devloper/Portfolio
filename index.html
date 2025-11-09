@@ -208,7 +208,7 @@
     }
 
     /* Resume Modal */
-    .resume-modal, .project-modal {
+    .resume-modal, .projects-modal {
         display: none;
         position: fixed;
         top: 0;
@@ -221,17 +221,17 @@
         animation: fadeIn 0.3s ease;
     }
 
-    .resume-modal.active, .project-modal.active {
+    .resume-modal.active, .projects-modal.active {
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
-    .resume-modal-content, .project-modal-content {
+    .resume-modal-content, .projects-modal-content {
         background: var(--card-bg);
         border-radius: 15px;
         box-shadow: var(--shadow);
-        max-width: 1000px;
+        max-width: 1200px;
         width: 95%;
         max-height: 90vh;
         overflow-y: auto;
@@ -239,7 +239,7 @@
         animation: slideIn 0.3s ease;
     }
 
-    .resume-modal-header, .project-modal-header {
+    .resume-modal-header, .projects-modal-header {
         position: sticky;
         top: 0;
         background: var(--card-bg);
@@ -251,13 +251,13 @@
         z-index: 10;
     }
 
-    .resume-modal-title, .project-modal-title {
+    .resume-modal-title, .projects-modal-title {
         font-size: 1.8rem;
         color: var(--primary);
         margin: 0;
     }
 
-    .resume-modal-close, .project-modal-close {
+    .resume-modal-close, .projects-modal-close {
         background: none;
         border: none;
         font-size: 1.5rem;
@@ -267,12 +267,12 @@
         padding: 5px;
     }
 
-    .resume-modal-close:hover, .project-modal-close:hover {
+    .resume-modal-close:hover, .projects-modal-close:hover {
         color: var(--primary);
         transform: scale(1.1);
     }
 
-    .resume-modal-body, .project-modal-body {
+    .resume-modal-body, .projects-modal-body {
         padding: 0;
     }
 
@@ -673,13 +673,6 @@
         margin-bottom: 2rem;
         opacity: 0;
         animation: fadeInUp 1s forwards 0.9s;
-    }
-
-    .hero-btns {
-        display: flex;
-        gap: 15px;
-        opacity: 0;
-        animation: fadeInUp 1s forwards 1.1s;
     }
 
     .hero-image {
@@ -1346,10 +1339,6 @@
             text-align: center;
         }
         
-        .hero-btns {
-            justify-content: center;
-        }
-        
         .projects-grid {
             grid-template-columns: 1fr;
         }
@@ -1383,12 +1372,12 @@
             align-items: center;
         }
         
-        .resume-modal-content, .project-modal-content {
+        .resume-modal-content, .projects-modal-content {
             width: 98%;
             max-height: 95vh;
         }
         
-        .resume-modal-header, .project-modal-header {
+        .resume-modal-header, .projects-modal-header {
             padding: 15px 20px;
         }
         
@@ -1704,19 +1693,112 @@
         </div>
     </div>
 
-    <!-- Project Modal -->
-    <div id="projectModal" class="project-modal">
-        <div class="project-modal-content">
-            <div class="project-modal-header">
-                <h2 class="project-modal-title" id="projectModalTitle">Project Details</h2>
-                <button class="project-modal-close" id="closeProjectModal">
+    <!-- Projects Modal -->
+    <div id="projectsModal" class="projects-modal">
+        <div class="projects-modal-content">
+            <div class="projects-modal-header">
+                <h2 class="projects-modal-title">My Projects</h2>
+                <button class="projects-modal-close" id="closeProjectsModal">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <div class="project-modal-body">
+            <div class="projects-modal-body">
                 <div class="resume-container">
-                    <div id="projectModalContent">
-                        <!-- Project details will be inserted here dynamically -->
+                    <div class="resume-content">
+                        <div class="projects-grid">
+                            <!-- Project 1 -->
+                            <div class="project-card">
+                                <div class="project-image">
+                                    <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="400" height="200" fill="#2563eb"/>
+                                        <text x="200" y="100" text-anchor="middle" fill="white" font-size="24" font-weight="bold">SalesSavvy Platform</text>
+                                    </svg>
+                                    <div class="project-overlay">
+                                        <div class="project-overlay-content">
+                                            <h3>E-commerce Solution</h3>
+                                            <p>50,000+ products with secure payment</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-content">
+                                    <h3 class="project-title">SalesSavvy E-commerce Platform</h3>
+                                    <p class="project-description">Engineered a comprehensive full-stack e-commerce solution capable of handling 50,000+ products with secure payment processing, real-time inventory management, and advanced analytics.</p>
+                                    <div class="project-tech">
+                                        <span class="tech-tag">Java</span>
+                                        <span class="tech-tag">Spring Boot</span>
+                                        <span class="tech-tag">React</span>
+                                        <span class="tech-tag">MySQL</span>
+                                        <span class="tech-tag">Razorpay</span>
+                                    </div>
+                                    <div class="project-links">
+                                        <a href="https://salesbyrohit.netlify.app/" class="btn" target="_blank">Live Demo</a>
+                                        <a href="#" class="btn btn-outline">Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Project 2 -->
+                            <div class="project-card">
+                                <div class="project-image">
+                                    <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="400" height="200" fill="#10b981"/>
+                                        <text x="200" y="100" text-anchor="middle" fill="white" font-size="24" font-weight="bold">Music Sphere</text>
+                                    </svg>
+                                    <div class="project-overlay">
+                                        <div class="project-overlay-content">
+                                            <h3>Music Streaming</h3>
+                                            <p>Playlist management & discovery</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-content">
+                                    <h3 class="project-title">Music Sphere</h3>
+                                    <p class="project-description">Developed a modern music streaming application with comprehensive features including playlist management, music discovery, and social sharing capabilities.</p>
+                                    <div class="project-tech">
+                                        <span class="tech-tag">Java</span>
+                                        <span class="tech-tag">Spring Boot</span>
+                                        <span class="tech-tag">HTML/CSS</span>
+                                        <span class="tech-tag">JavaScript</span>
+                                        <span class="tech-tag">Node.js</span>
+                                    </div>
+                                    <div class="project-links">
+                                        <a href="#" class="btn">Live Demo</a>
+                                        <a href="#" class="btn btn-outline">Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Project 3 -->
+                            <div class="project-card">
+                                <div class="project-image">
+                                    <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="400" height="200" fill="#8b5cf6"/>
+                                        <text x="200" y="100" text-anchor="middle" fill="white" font-size="24" font-weight="bold">Portfolio Website</text>
+                                    </svg>
+                                    <div class="project-overlay">
+                                        <div class="project-overlay-content">
+                                            <h3>Responsive Portfolio</h3>
+                                            <p>Modern UI/UX with animations</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-content">
+                                    <h3 class="project-title">Portfolio Website</h3>
+                                    <p class="project-description">Designed and developed a responsive portfolio website with modern UI/UX principles, smooth animations, and optimized performance.</p>
+                                    <div class="project-tech">
+                                        <span class="tech-tag">HTML5</span>
+                                        <span class="tech-tag">CSS3</span>
+                                        <span class="tech-tag">JavaScript</span>
+                                        <span class="tech-tag">Responsive Design</span>
+                                        <span class="tech-tag">UI/UX</span>
+                                    </div>
+                                    <div class="project-links">
+                                        <a href="#" class="btn">Live Demo</a>
+                                        <a href="#" class="btn btn-outline">Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1730,10 +1812,6 @@
                 <h1>Rohit Dutta</h1>
                 <h2>Java Developer | Full Stack | Cloud & DevOps</h2>
                 <p>Results-driven Java Developer with expertise in Full Stack Development, Cloud Computing (AWS, Azure), and DevOps practices. Passionate about creating clean, efficient code and delivering robust software solutions that solve real-world problems. With a strong foundation in modern development methodologies and a commitment to continuous learning, I excel at building scalable applications that meet both user needs and business objectives.</p>
-                <div class="hero-btns">
-                    <a href="#projects" class="btn">View Projects</a>
-                    <a href="#contact" class="btn btn-outline">Contact Me</a>
-                </div>
             </div>
         </div>
         <div class="hero-image">
@@ -1753,12 +1831,29 @@
         </div>
     </section>
 
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="experience-timeline">
+                <div class="experience-item-timeline">
+                    <div class="experience-content-item">
+                        <div class="experience-date">Oct 2024 - June 2025</div>
+                        <h3>Full Stack Java Developer</h3>
+                        <h4>KodNest Technologies Pvt Ltd</h4>
+                        <p>Completed Java Full Stack Development training covering Core Java, Spring Boot, Hibernate, SQL, HTML, CSS, JavaScript, and React. Gained hands-on experience in real-time projects and acquired strong knowledge of SDLC.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
             <h2 class="section-title">Major Projects</h2>
             <div class="projects-grid">
-                <div class="project-card" data-project="sales">
+                <div class="project-card">
                     <div class="project-image">
                         <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
                             <rect width="400" height="200" fill="#2563eb"/>
@@ -1783,12 +1878,12 @@
                         </div>
                         <div class="project-links">
                             <a href="https://salesbyrohit.netlify.app/" class="btn" target="_blank">Live Demo</a>
-                            <a href="#" class="btn btn-outline view-project-details">Details</a>
+                            <a href="#" class="btn btn-outline">Details</a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="project-card" data-project="music">
+                <div class="project-card">
                     <div class="project-image">
                         <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
                             <rect width="400" height="200" fill="#10b981"/>
@@ -1813,12 +1908,12 @@
                         </div>
                         <div class="project-links">
                             <a href="#" class="btn">Live Demo</a>
-                            <a href="#" class="btn btn-outline view-project-details">Details</a>
+                            <a href="#" class="btn btn-outline">Details</a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="project-card" data-project="portfolio">
+                <div class="project-card">
                     <div class="project-image">
                         <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
                             <rect width="400" height="200" fill="#8b5cf6"/>
@@ -1843,25 +1938,8 @@
                         </div>
                         <div class="project-links">
                             <a href="#" class="btn">Live Demo</a>
-                            <a href="#" class="btn btn-outline view-project-details">Details</a>
+                            <a href="#" class="btn btn-outline">Details</a>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="experience">
-        <div class="container">
-            <h2 class="section-title">Professional Experience</h2>
-            <div class="experience-timeline">
-                <div class="experience-item-timeline">
-                    <div class="experience-content-item">
-                        <div class="experience-date">Oct 2024 - June 2025</div>
-                        <h3>Full Stack Java Developer</h3>
-                        <h4>KodNest Technologies Pvt Ltd</h4>
-                        <p>Completed Java Full Stack Development training covering Core Java, Spring Boot, Hibernate, SQL, HTML, CSS, JavaScript, and React. Gained hands-on experience in real-time projects and acquired strong knowledge of SDLC.</p>
                     </div>
                 </div>
             </div>
@@ -2038,7 +2116,6 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2023 Rohit Dutta. All Rights Reserved.</p>
         </div>
     </footer>
 
@@ -2053,56 +2130,8 @@
     const closeResumeModal = document.getElementById('closeResumeModal');
     const downloadResumeBtn = document.getElementById('downloadResumeBtn');
     const resumeLink = document.getElementById('resumeLink');
-    const projectModal = document.getElementById('projectModal');
-    const closeProjectModal = document.getElementById('closeProjectModal');
-    const projectModalTitle = document.getElementById('projectModalTitle');
-    const projectModalContent = document.getElementById('projectModalContent');
-
-    // Project Data
-    const projects = {
-        sales: {
-            title: "SalesSavvy E-commerce Platform",
-            description: "Engineered a comprehensive full-stack e-commerce solution capable of handling 50,000+ products with secure payment processing, real-time inventory management, and advanced analytics. The platform features a microservices architecture that ensures scalability and reliability while providing an exceptional user experience.",
-            technologies: ["Java", "Spring Boot", "React", "MySQL", "Razorpay", "Microservices", "JWT"],
-            features: [
-                "Developed scalable microservices architecture using Spring Boot",
-                "Implemented JWT authentication, role-based access control, and comprehensive API security",
-                "Built responsive React frontend with advanced features including wishlist management and coupon system",
-                "Integrated Razorpay payment gateway, reducing checkout time by 40%",
-                "Designed and deployed admin analytics dashboard with sales tracking and inventory alerts"
-            ],
-            liveLink: "https://salesbyrohit.netlify.app/",
-            githubLink: "#"
-        },
-        music: {
-            title: "Music Sphere",
-            description: "Developed a modern music streaming application with comprehensive features including playlist management, music discovery, and social sharing capabilities. Implemented secure user authentication and authorization systems while ensuring optimal performance across various devices and network conditions.",
-            technologies: ["Java", "Spring Boot", "HTML/CSS", "JavaScript", "Node.js", "MongoDB", "JWT"],
-            features: [
-                "Integrated JWT authentication for secure user access",
-                "Developed a responsive frontend with React.js",
-                "Ensured scalable API performance using Node.js & Express",
-                "Optimized data handling with MongoDB for playlist and music metadata",
-                "Implemented music discovery algorithms and social sharing features"
-            ],
-            liveLink: "#",
-            githubLink: "#"
-        },
-        portfolio: {
-            title: "Portfolio Website",
-            description: "Designed and developed a responsive portfolio website with modern UI/UX principles, smooth animations, and optimized performance. Implemented best practices for web accessibility and SEO while ensuring cross-browser compatibility and mobile-first responsive design.",
-            technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "UI/UX", "SEO"],
-            features: [
-                "Implemented modern UI/UX principles for optimal user experience",
-                "Ensured responsive design with mobile-first approach",
-                "Optimized performance and loading times",
-                "Applied SEO best practices for better search engine visibility",
-                "Added smooth animations and transitions for enhanced interactivity"
-            ],
-            liveLink: "#",
-            githubLink: "#"
-        }
-    };
+    const projectsModal = document.getElementById('projectsModal');
+    const closeProjectsModal = document.getElementById('closeProjectsModal');
 
     // Initialize the application
     function init() {
@@ -2129,26 +2158,13 @@
         if (closeResumeModal) closeResumeModal.addEventListener('click', closeResumeModalFunc);
         if (downloadResumeBtn) downloadResumeBtn.addEventListener('click', downloadResume);
         
-        // Project Modal
-        if (closeProjectModal) closeProjectModal.addEventListener('click', closeProjectModalFunc);
-        
-        // View Project Details
-        document.querySelectorAll('.view-project-details').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                const projectCard = this.closest('.project-card');
-                const projectId = projectCard.getAttribute('data-project');
-                openProjectModal(projectId);
-            });
-        });
-        
         // Close modals when clicking outside
         window.addEventListener('click', (e) => {
             if (e.target === resumeModal) {
                 closeResumeModalFunc();
             }
-            if (e.target === projectModal) {
-                closeProjectModalFunc();
+            if (e.target === projectsModal) {
+                closeProjectsModalFunc();
             }
         });
         
@@ -2168,8 +2184,8 @@
                 if (resumeModal.classList.contains('active')) {
                     closeResumeModalFunc();
                 }
-                if (projectModal.classList.contains('active')) {
-                    closeProjectModalFunc();
+                if (projectsModal.classList.contains('active')) {
+                    closeProjectsModalFunc();
                 }
             }
         });
@@ -2269,54 +2285,9 @@
         document.body.removeChild(link);
     }
 
-    // Project Modal Functions
-    function openProjectModal(projectId) {
-        const project = projects[projectId];
-        if (!project) return;
-        
-        projectModalTitle.textContent = project.title;
-        
-        let techTags = '';
-        project.technologies.forEach(tech => {
-            techTags += `<span class="tech-tag">${tech}</span>`;
-        });
-        
-        let featuresList = '';
-        project.features.forEach(feature => {
-            featuresList += `<li>${feature}</li>`;
-        });
-        
-        projectModalContent.innerHTML = `
-            <div class="project-item">
-                <div class="project-header">
-                    <div class="project-title">${project.title}</div>
-                </div>
-                <div class="project-tech">
-                    ${techTags}
-                </div>
-                <p class="project-description">
-                    ${project.description}
-                </p>
-                <ul class="experience-list">
-                    ${featuresList}
-                </ul>
-                <div class="project-links">
-                    <a href="${project.liveLink}" class="btn" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Live Demo
-                    </a>
-                    <a href="${project.githubLink}" class="btn btn-outline" target="_blank">
-                        <i class="fab fa-github"></i> View Code
-                    </a>
-                </div>
-            </div>
-        `;
-        
-        projectModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeProjectModalFunc() {
-        projectModal.classList.remove('active');
+    // Projects Modal Functions
+    function closeProjectsModalFunc() {
+        projectsModal.classList.remove('active');
         document.body.style.overflow = 'auto';
     }
 
