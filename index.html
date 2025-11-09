@@ -718,12 +718,8 @@
             animation: fadeInUp 1s forwards 0.9s;
         }
 
-        .hero-btns {
-            display: flex;
-            gap: 15px;
-            opacity: 0;
-            animation: fadeInUp 1s forwards 1.1s;
-        }
+
+
 
         .hero-image {
             position: absolute;
@@ -1435,10 +1431,9 @@
                 max-width: 100%;
                 text-align: center;
             }
-            
-            .hero-btns {
-                justify-content: center;
-            }
+
+
+    
             
             .projects-grid, .certificates-grid {
                 grid-template-columns: 1fr;
@@ -1818,10 +1813,6 @@
                 <h1>Rohit Dutta</h1>
                 <h2>Java Developer | Full Stack | Cloud & DevOps</h2>
                 <p>Results-driven Java Developer with expertise in Full Stack Development, Cloud Computing (AWS, Azure), and DevOps practices. Passionate about creating clean, efficient code and delivering robust software solutions that solve real-world problems. With a strong foundation in modern development methodologies and a commitment to continuous learning, I excel at building scalable applications that meet both user needs and business objectives.</p>
-                <div class="hero-btns">
-                    <a href="#" class="btn" id="viewProjectsBtn">View Projects</a>
-                    <a href="#contact" class="btn btn-outline">Contact Me</a>
-                </div>
             </div>
         </div>
         <div class="hero-image">
@@ -2191,7 +2182,7 @@
         const closeProjectModal = document.getElementById('closeProjectModal');
         const projectModalTitle = document.getElementById('projectModalTitle');
         const projectModalContent = document.getElementById('projectModalContent');
-        const viewProjectsBtn = document.getElementById('viewProjectsBtn');
+
 
         // Project Data
         const projects = {
@@ -2277,11 +2268,7 @@
                 });
             });
             
-            // View Projects Button
-            if (viewProjectsBtn) viewProjectsBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                openProjectModal('sales'); // Open the first project by default
-            });
+
             
             // Close modals when clicking outside
             window.addEventListener('click', (e) => {
