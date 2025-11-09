@@ -122,6 +122,58 @@
             color: white;
         }
 
+        /* 3D Background Elements */
+        .bg-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-element {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            opacity: 0.05;
+            filter: blur(40px);
+            animation: float3d 20s infinite ease-in-out;
+        }
+
+        .bg-element:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .bg-element:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .bg-element:nth-child(3) {
+            width: 250px;
+            height: 250px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 10s;
+        }
+
+        .bg-element:nth-child(4) {
+            width: 350px;
+            height: 350px;
+            top: 30%;
+            right: 30%;
+            animation-delay: 15s;
+        }
+
         /* Header & Navigation */
         header {
             position: fixed;
@@ -718,8 +770,12 @@
             animation: fadeInUp 1s forwards 0.9s;
         }
 
-
-
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            opacity: 0;
+            animation: fadeInUp 1s forwards 1.1s;
+        }
 
         .hero-image {
             position: absolute;
@@ -731,7 +787,7 @@
             animation: fadeInRight 1s forwards 1s;
         }
 
-        /* Improved Profile Photo - Non-rotating */
+        /* 3D Profile Photo */
         .profile-photo {
             width: 350px;
             height: 350px;
@@ -786,46 +842,6 @@
         .profile-overlay i {
             font-size: 2rem;
             color: white;
-        }
-
-        .floating-elements {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            overflow: hidden;
-        }
-
-        .floating-element {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(37, 99, 235, 0.1);
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .floating-element:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .floating-element:nth-child(2) {
-            width: 120px;
-            height: 120px;
-            top: 20%;
-            right: 10%;
-            animation-delay: 2s;
-        }
-
-        .floating-element:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            bottom: 20%;
-            left: 20%;
-            animation-delay: 4s;
         }
 
         /* Projects Section */
@@ -1328,6 +1344,18 @@
             }
         }
 
+        @keyframes float3d {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -1431,9 +1459,10 @@
                 max-width: 100%;
                 text-align: center;
             }
-
-
-    
+            
+            .hero-btns {
+                justify-content: center;
+            }
             
             .projects-grid, .certificates-grid {
                 grid-template-columns: 1fr;
@@ -1518,10 +1547,22 @@
             .skills-container {
                 grid-template-columns: 1fr;
             }
+            
+            .hero-btns {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- 3D Background Elements -->
+    <div class="bg-elements">
+        <div class="bg-element"></div>
+        <div class="bg-element"></div>
+        <div class="bg-element"></div>
+        <div class="bg-element"></div>
+    </div>
+
     <!-- Header -->
     <header>
         <div class="container">
@@ -1813,6 +1854,10 @@
                 <h1>Rohit Dutta</h1>
                 <h2>Java Developer | Full Stack | Cloud & DevOps</h2>
                 <p>Results-driven Java Developer with expertise in Full Stack Development, Cloud Computing (AWS, Azure), and DevOps practices. Passionate about creating clean, efficient code and delivering robust software solutions that solve real-world problems. With a strong foundation in modern development methodologies and a commitment to continuous learning, I excel at building scalable applications that meet both user needs and business objectives.</p>
+                <div class="hero-btns">
+                    <a href="#projects" class="btn">View Projects</a>
+                    <a href="#contact" class="btn btn-outline">Contact Me</a>
+                </div>
             </div>
         </div>
         <div class="hero-image">
@@ -1824,11 +1869,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="floating-elements">
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
         </div>
     </section>
 
@@ -1856,10 +1896,7 @@
             <div class="projects-grid">
                 <div class="project-card" data-project="sales">
                     <div class="project-image">
-                        <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="400" height="200" fill="#2563eb"/>
-                            <text x="200" y="100" text-anchor="middle" fill="white" font-size="24" font-weight="bold">SalesSavvy Platform</text>
-                        </svg>
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="E-commerce Platform">
                         <div class="project-overlay">
                             <div class="project-overlay-content">
                                 <h3>View Details</h3>
@@ -1886,10 +1923,7 @@
                 
                 <div class="project-card" data-project="music">
                     <div class="project-image">
-                        <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="400" height="200" fill="#10b981"/>
-                            <text x="200" y="100" text-anchor="middle" fill="white" font-size="24" font-weight="bold">Music Sphere</text>
-                        </svg>
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Music Streaming App">
                         <div class="project-overlay">
                             <div class="project-overlay-content">
                                 <h3>View Details</h3>
@@ -1916,10 +1950,7 @@
                 
                 <div class="project-card" data-project="portfolio">
                     <div class="project-image">
-                        <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="400" height="200" fill="#8b5cf6"/>
-                            <text x="200" y="100" text-anchor="middle" fill="white" font-size="24" font-weight="bold">Portfolio Website</text>
-                        </svg>
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1415&q=80" alt="Portfolio Website">
                         <div class="project-overlay">
                             <div class="project-overlay-content">
                                 <h3>View Details</h3>
@@ -2183,7 +2214,6 @@
         const projectModalTitle = document.getElementById('projectModalTitle');
         const projectModalContent = document.getElementById('projectModalContent');
 
-
         // Project Data
         const projects = {
             sales: {
@@ -2267,8 +2297,6 @@
                     openProjectModal(projectId);
                 });
             });
-            
-
             
             // Close modals when clicking outside
             window.addEventListener('click', (e) => {
@@ -2378,10 +2406,6 @@
         function closeResumeModalFunc() {
             resumeModal.classList.remove('active');
             document.body.style.overflow = 'auto';
-        }
-
-        function closeResume() {
-            closeResumeModalFunc();
         }
 
         function downloadResume() {
