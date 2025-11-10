@@ -126,6 +126,51 @@ section {
     color: white;
 }
 
+/* Professional Logo */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo-inner {
+    width: 30px;
+    height: 30px;
+    background: white;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.logo-code {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.2rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-decoration: none;
+}
+
 /* 3D Background Elements */
 .bg-elements {
     position: fixed;
@@ -196,13 +241,6 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 15px 0;
-}
-
-.logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary);
-    text-decoration: none;
 }
 
 .nav-links {
@@ -381,6 +419,110 @@ header {
 .profile-overlay i {
     font-size: 1.8rem;
     color: white;
+}
+
+/* Technical Terminology Section */
+.tech-terminology {
+    background: var(--card-bg);
+    padding: 40px 0;
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.tech-card {
+    background: var(--bg-color);
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border-left: 4px solid var(--primary);
+    text-align: center;
+}
+
+.tech-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.tech-icon {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.tech-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.tech-card p {
+    color: var(--gray);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* AI-Enhanced Image Sections */
+.ai-image-section {
+    padding: 60px 0;
+    background: var(--bg-color);
+}
+
+.ai-image-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.ai-image-card {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+}
+
+.ai-image-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.ai-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.ai-image-card:hover .ai-image {
+    transform: scale(1.05);
+}
+
+.ai-image-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    transition: var(--transition);
+}
+
+.ai-image-title {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+
+.ai-image-description {
+    font-size: 0.9rem;
+    opacity: 0.9;
 }
 
 /* Resume Modal */
@@ -799,73 +941,6 @@ header {
     gap: 12px;
     align-items: center;
     flex-wrap: wrap;
-}
-
-/* Print Styles for Resume */
-@media print {
-    body * {
-        visibility: hidden;
-    }
-    
-    .resume-modal,
-    .resume-modal * {
-        visibility: visible;
-    }
-    
-    .resume-modal {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: auto;
-        background: white;
-        overflow: visible;
-    }
-    
-    .resume-modal-content {
-        box-shadow: none;
-        margin: 0;
-        max-width: none;
-        width: 100%;
-    }
-    
-    .resume-modal-header,
-    .resume-actions,
-    .resume-modal-close,
-    .download-btn {
-        display: none !important;
-    }
-    
-    .resume-container {
-        box-shadow: none;
-        border: none;
-    }
-    
-    .resume-header {
-        background: linear-gradient(135deg, #2563eb 0%, #10b981 100%) !important;
-        -webkit-print-color-adjust: exact;
-    }
-    
-    .resume-content {
-        padding: 20px;
-    }
-    
-    .experience-item,
-    .project-item,
-    .certificate-item {
-        background: #f8f9fa !important;
-        -webkit-print-color-adjust: exact;
-    }
-    
-    .skill-tag {
-        background: rgba(37, 99, 235, 0.1) !important;
-        -webkit-print-color-adjust: exact;
-    }
-    
-    .tech-tag {
-        background: rgba(16, 185, 129, 0.1) !important;
-        -webkit-print-color-adjust: exact;
-    }
 }
 
 /* Projects Section */
@@ -1813,6 +1888,14 @@ header {
         height: 45px;
         font-size: 1.3rem;
     }
+    
+    .ai-image-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .tech-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 576px) {
@@ -1964,7 +2047,9 @@ header {
     .badge:hover,
     .profile-photo:hover .profile-overlay,
     .about-grid-item:hover,
-    .about-main-image:hover {
+    .about-main-image:hover,
+    .ai-image-card:hover,
+    .tech-card:hover {
         transform: none;
     }
     
@@ -1974,6 +2059,10 @@ header {
     
     .project-card:hover .project-overlay {
         opacity: 0;
+    }
+    
+    .ai-image-card:hover .ai-image {
+        transform: none;
     }
     
     .nav-links a:hover::after {
@@ -2021,7 +2110,14 @@ header {
     <header>
         <div class="container">
             <nav class="navbar">
-                <a href="#" class="logo">RD</a>
+                <div class="logo-container">
+                    <div class="logo">
+                        <div class="logo-inner">
+                            <span class="logo-code">RD</span>
+                        </div>
+                    </div>
+                    <a href="#" class="logo-text">Rohit Dutta</a>
+                </div>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#experience">Experience</a></li>
@@ -2320,6 +2416,73 @@ header {
                 <img src="./1751294918810.jpg" alt="Rohit Dutta">
                 <div class="profile-overlay">
                     <i class="fas fa-user"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Technical Terminology Section -->
+<section class="tech-terminology">
+    <div class="container">
+        <h2 class="section-title">Technical Expertise</h2>
+        <div class="tech-grid">
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>Microservices Architecture</h3>
+                <p>Designing and implementing scalable, distributed systems using Spring Boot and cloud-native patterns for high availability and resilience.</p>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <h3>Cloud Infrastructure</h3>
+                <p>Deploying and managing applications on AWS and Google Cloud Platform with Infrastructure as Code using Terraform and Kubernetes.</p>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <h3>CI/CD Pipelines</h3>
+                <p>Implementing automated build, test, and deployment workflows using Jenkins, Docker, and Git for rapid and reliable software delivery.</p>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3>Database Management</h3>
+                <p>Designing efficient database schemas, optimizing queries, and implementing data access layers with Spring Data JPA and Hibernate.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AI-Enhanced Image Section -->
+<section class="ai-image-section">
+    <div class="container">
+        <h2 class="section-title">Development Journey</h2>
+        <div class="ai-image-container">
+            <div class="ai-image-card">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Code Development" class="ai-image">
+                <div class="ai-image-content">
+                    <h3 class="ai-image-title">Clean Code Architecture</h3>
+                    <p class="ai-image-description">Implementing SOLID principles and design patterns for maintainable and scalable software solutions.</p>
+                </div>
+            </div>
+            <div class="ai-image-card">
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Cloud Technology" class="ai-image">
+                <div class="ai-image-content">
+                    <h3 class="ai-image-title">Cloud-Native Development</h3>
+                    <p class="ai-image-description">Building and deploying applications optimized for cloud environments with containerization and orchestration.</p>
+                </div>
+            </div>
+            <div class="ai-image-card">
+                <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="DevOps Pipeline" class="ai-image">
+                <div class="ai-image-content">
+                    <h3 class="ai-image-title">DevOps Automation</h3>
+                    <p class="ai-image-description">Streamlining development workflows with automated testing, deployment, and monitoring solutions.</p>
                 </div>
             </div>
         </div>
@@ -2880,7 +3043,7 @@ header {
             }, observerOptions);
             
             // Observe elements for animation
-            document.querySelectorAll('.project-card, .education-item, .experience-item-timeline, .certificate-card').forEach(el => {
+            document.querySelectorAll('.project-card, .education-item, .experience-item-timeline, .certificate-card, .tech-card, .ai-image-card').forEach(el => {
                 observer.observe(el);
             });
         }
